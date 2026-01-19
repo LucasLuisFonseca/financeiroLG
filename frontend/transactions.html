@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>financeiroL+G | Transações</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="transactions.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <aside class="sidebar">
+    <h2>financeiro<span>L+G</span></h2>
+
+    <nav>
+     <a href="dashboard.html" class="active">Dashboard</a>
+<a href="transactions.html">Transações</a>
+<a href="goals.html">Metas</a>
+<a href="reports.html">Relatórios</a>
+    </nav>
+
+    <button id="logout">Sair</button>
+  </aside>
+
+  <main class="content">
+
+    <header>
+      <h1>💸 Transações</h1>
+    </header>
+
+    <section class="form-card">
+      <h3>Nova Transação</h3>
+
+      <form id="transactionForm">
+        <select id="type">
+          <option value="receita">Receita</option>
+          <option value="despesa">Despesa</option>
+        </select>
+
+        <input type="text" id="category" placeholder="Categoria" required>
+        <input type="number" id="value" placeholder="Valor" step="0.01" required>
+        <input type="date" id="date" required>
+        <input type="text" id="description" placeholder="Descrição">
+
+        <button type="submit">Salvar</button>
+      </form>
+    </section>
+
+    <section class="list-card">
+      <h3>Histórico</h3>
+      <ul id="list"></ul>
+    </section>
+
+  </main>
+
+  <script src="transactions.js"></script>
+</body>
+</html>
