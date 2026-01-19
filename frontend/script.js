@@ -24,7 +24,7 @@ form.addEventListener("submit", (e) => {
 
   const endpoint = isLogin ? "/login" : "/register";
 
-  fetch("http://localhost:3000" + endpoint, {
+  fetch("https://financeirolg.onrender.com/" + endpoint, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"

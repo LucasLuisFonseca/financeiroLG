@@ -21,7 +21,7 @@ form.onsubmit = e => {
     description: description.value
   };
 
-  fetch("http://localhost:3000/transactions", {
+  fetch("https://financeirolg.onrender.com/transactions", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -37,7 +37,7 @@ form.onsubmit = e => {
 
 // listar
 function load() {
-  fetch("http://localhost:3000/transactions", {
+  fetch("https://financeirolg.onrender.com/transactions", {
     headers: { Authorization: "Bearer " + token }
   })
   .then(res => res.json())
@@ -59,7 +59,7 @@ function load() {
 
 // remover (precisa rota, te passo abaixo)
 function remove(id) {
-  fetch(`http://localhost:3000/transactions/${id}`, {
+  fetch(`https://financeirolg.onrender.com/transactions/${id}`, {
     method: "DELETE",
     headers: { Authorization: "Bearer " + token }
   })

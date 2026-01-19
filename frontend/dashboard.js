@@ -21,7 +21,7 @@ const incomeEl = document.querySelector(".income");
 const expenseEl = document.querySelector(".expense");
 
 // buscar transações reais
-fetch("http://localhost:3000/transactions", {
+fetch("https://financeirolg.onrender.com/transactions", {
   headers: {
     Authorization: "Bearer " + token
   }
@@ -51,7 +51,7 @@ fetch("http://localhost:3000/transactions", {
 });
 
 // buscar metas reais
-fetch("http://localhost:3000/goals", {
+fetch("https://financeirolg.onrender.com/goals", {
   headers: {
     Authorization: "Bearer " + token
   }

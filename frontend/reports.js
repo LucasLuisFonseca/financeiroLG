@@ -23,7 +23,7 @@ let chart;
 document.getElementById("filter").onclick = load;
 
 function load() {
-  fetch("http://localhost:3000/transactions", {
+  fetch("https://financeirolg.onrender.com/transactions", {
     headers: { Authorization: "Bearer " + token }
   })
   .then(res => res.json())

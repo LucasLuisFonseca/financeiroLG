@@ -12,7 +12,7 @@ const form = document.getElementById("goalForm");
 // criar meta
 form.onsubmit = e => {
   e.preventDefault();
-  fetch("http://localhost:3000/goals", {
+  fetch("https://financeirolg.onrender.com/goals", {
     method:"POST",
     headers:{
       "Content-Type":"application/json",
@@ -30,7 +30,7 @@ form.onsubmit = e => {
 
 // listar metas
 function load(){
-  fetch("http://localhost:3000/goals", {
+  fetch("https://financeirolg.onrender.com/goals", {
     headers:{ Authorization:"Bearer "+token }
   })
   .then(r=>r.json())
@@ -56,7 +56,7 @@ function load(){
 
 // adicionar valor à meta
 function add(id, value){
-  fetch(`http://localhost:3000/goals/${id}`, {
+  fetch(`https://financeirolg.onrender.com/goals/${id}`, {
     method:"PUT",
     headers:{
       "Content-Type":"application/json",
@@ -68,7 +68,7 @@ function add(id, value){
 
 // remover meta
 function removeGoal(id){
-  fetch(`http://localhost:3000/goals/${id}`, {
+  fetch(`https://financeirolg.onrender.com/goals/${id}`, {
     method:"DELETE",
     headers:{ Authorization:"Bearer "+token }
   }).then(load);
