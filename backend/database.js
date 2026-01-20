@@ -34,5 +34,17 @@ db.serialize(() => {
     )
   `);
 });
+db.run(`
+CREATE TABLE IF NOT EXISTS investments (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_id INTEGER,
+  title TEXT,
+  value REAL,
+  rate REAL,
+  months INTEGER,
+  final_value REAL,
+  profit REAL
+);
+`);
 
 module.exports = db;

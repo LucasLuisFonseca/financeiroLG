@@ -1,40 +1,156 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>financeiroL+G | Metas</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <title>L & G Finanças | Metas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="goals.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
+  <!-- Menu Hamburger -->
+<button class="menu-toggle" id="menuToggle">
+  <i class="fas fa-bars"></i>
+</button>
 
-  <aside class="sidebar">
-    <h2>financeiro<span>L+G</span></h2>
-    <nav>
-     <a href="dashboard.html" class="active">Dashboard</a>
-<a href="transactions.html">Transações</a>
-<a href="goals.html">Metas</a>
-<a href="reports.html">Relatórios</a>
+<!-- Overlay -->
+<div class="overlay" id="overlay"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="logo">
+      <i class="fas fa-chart-line"></i>
+      <h2>L & G <span>Finanças</span></h2>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="dashboard.html" class="nav-link">
+        <i class="fas fa-chart-bar"></i>
+        <span>Dashboard</span>
+      </a>
+      <a href="transactions.html" class="nav-link">
+        <i class="fas fa-exchange-alt"></i>
+        <span>Transações</span>
+      </a>
+      <a href="goals.html" class="nav-link active">
+        <i class="fas fa-bullseye"></i>
+        <span>Metas</span>
+      </a>
+      <a href="reports.html" class="nav-link">
+        <i class="fa-solid fa-file-invoice"></i>
+        <span>Relatórios</span>
+      </a>
     </nav>
-    <button id="logout">Sair</button>
+
+    <div class="sidebar-footer">
+      <button id="themeToggle" class="theme-btn">
+        <i class="fas fa-moon"></i>
+      </button>
+      <button id="logout" class="logout-btn">
+        <i class="fas fa-sign-out-alt"></i>
+      </button>
+    </div>
   </aside>
 
-  <main class="content">
-    <header>
-      <h1>Metas Financeiras</h1>
+  <div class="overlay" id="overlay"></div>
+
+  <main class="content" id="content">
+    <header class="main-header">
+      <div class="header-left">
+        <h1>Metas Financeiras</h1>
+        <p class="subtitle">Gerencie suas metas e acompanhe seu progresso</p>
+      </div>
+      
+      <div class="date-display">
+        <i class="far fa-calendar"></i>
+        <span id="currentDate"></span>
+      </div>
     </header>
 
-    <section class="form-card">
-      <h3>Nova Meta</h3>
-      <form id="goalForm">
-        <input type="text" id="title" placeholder="Título da meta" required>
-        <input type="number" id="target" placeholder="Valor da meta" step="0.01" required>
-        <button>Criar Meta</button>
-      </form>
+    <section class="stats-summary">
+      <div class="stat-card">
+        <div class="stat-header">
+          <h3>Total em Metas</h3>
+          <i class="fas fa-bullseye"></i>
+        </div>
+        <p class="stat-value" id="totalGoals">R$ 0,00</p>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-header">
+          <h3>Total Arrecadado</h3>
+          <i class="fas fa-piggy-bank"></i>
+        </div>
+        <p class="stat-value" id="totalSaved">R$ 0,00</p>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-header">
+          <h3>Metas Concluídas</h3>
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <p class="stat-value" id="completedGoals">0</p>
+      </div>
     </section>
 
-    <section id="goals" class="goals"></section>
+    <section class="form-section">
+      <div class="form-card">
+        <h3><i class="fas fa-plus-circle"></i> Nova Meta</h3>
+        <form id="goalForm">
+          <div class="form-group">
+            <label for="title">Nome da Meta</label>
+            <input type="text" id="title" placeholder="Ex: Viagem para Europa" required>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="target">Valor da Meta</label>
+              <input type="number" id="target" placeholder="0,00" step="0.01" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="category">Categoria</label>
+              <select id="category">
+                <option value="Viagem">Viagem</option>
+                <option value="Carro">Carro</option>
+                <option value="Casa">Casa</option>
+                <option value="Educação">Educação</option>
+                <option value="Emergência">Emergência</option>
+                <option value="Outro">Outro</option>
+              </select>
+            </div>
+          </div>
+          
+          <button type="submit" class="submit-btn">
+            <i class="fas fa-plus"></i>
+            Criar Meta
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <section class="goals-section">
+      <div class="section-header">
+        <h2>Suas Metas</h2>
+        <div class="filter-controls">
+          <select id="filterStatus">
+            <option value="all">Todas</option>
+            <option value="active">Em andamento</option>
+            <option value="completed">Concluídas</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="goals-container" id="goalsContainer">
+        <!-- Metas serão carregadas aqui -->
+        <div class="empty-state">
+          <i class="fas fa-bullseye"></i>
+          <h3>Nenhuma meta criada</h3>
+          <p>Crie sua primeira meta para começar a economizar</p>
+        </div>
+      </div>
+    </section>
   </main>
 
   <script src="goals.js"></script>

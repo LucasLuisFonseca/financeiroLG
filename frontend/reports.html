@@ -1,76 +1,280 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>financeiroL+G | Relatórios</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <meta charset="UTF-8" />
+  <title>L & G Finanças | Relatórios</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="reports.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+  <!-- Menu Hamburger -->
+<button class="menu-toggle" id="menuToggle">
+  <i class="fas fa-bars"></i>
+</button>
 
-  <aside class="sidebar">
-    <h2>financeiro<span>L+G</span></h2>
-    <nav>
-     <a href="dashboard.html" class="active">Dashboard</a>
-<a href="transactions.html">Transações</a>
-<a href="goals.html">Metas</a>
-<a href="reports.html">Relatórios</a>
+<!-- Overlay -->
+<div class="overlay" id="overlay"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="logo">
+      <i class="fas fa-chart-line"></i>
+      <h2>L & G <span>Finanças</span></h2>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="dashboard.html" class="nav-link">
+        <i class="fas fa-chart-bar"></i>
+        <span>Dashboard</span>
+      </a>
+      <a href="transactions.html" class="nav-link">
+        <i class="fas fa-exchange-alt"></i>
+        <span>Transações</span>
+      </a>
+      <a href="goals.html" class="nav-link">
+        <i class="fas fa-bullseye"></i>
+        <span>Metas</span>
+      </a>
+      <a href="reports.html" class="nav-link active">
+        <i class="fa-solid fa-file-invoice"></i>
+        <span>Relatórios</span>
+      </a>
     </nav>
-    <button id="logout">Sair</button>
+
+    <div class="sidebar-footer">
+      <button id="themeToggle" class="theme-btn">
+        <i class="fas fa-moon"></i>
+      </button>
+      <button id="logout" class="logout-btn">
+        <i class="fas fa-sign-out-alt"></i>
+      </button>
+    </div>
   </aside>
 
-  <main class="content">
+  <div class="overlay" id="overlay"></div>
 
-    <header>
-      <h1>📊 Relatórios Financeiros</h1>
+  <main class="content" id="content">
+    <header class="main-header">
+      <div class="header-left">
+        <h1>Relatórios Financeiros</h1>
+        <p class="subtitle">Análise detalhada das suas finanças</p>
+      </div>
+      
+      <div class="date-display">
+        <i class="far fa-calendar"></i>
+        <span id="currentDate"></span>
+      </div>
     </header>
 
-    <section class="filters">
-      <select id="month">
-        <option value="0">Janeiro</option>
-        <option value="1">Fevereiro</option>
-        <option value="2">Março</option>
-        <option value="3">Abril</option>
-        <option value="4">Maio</option>
-        <option value="5">Junho</option>
-        <option value="6">Julho</option>
-        <option value="7">Agosto</option>
-        <option value="8">Setembro</option>
-        <option value="9">Outubro</option>
-        <option value="10">Novembro</option>
-        <option value="11">Dezembro</option>
-      </select>
-
-      <select id="year"></select>
-
-      <button id="filter">Filtrar</button>
+    <section class="filters-section">
+      <div class="filters-card">
+        <h3><i class="fas fa-filter"></i> Filtros do Relatório</h3>
+        <div class="filters-grid">
+          <div class="filter-group">
+            <label for="reportType">Tipo de Relatório</label>
+            <select id="reportType">
+              <option value="monthly">Mensal</option>
+              <option value="annual">Anual</option>
+              <option value="category">Por Categoria</option>
+              <option value="trend">Tendências</option>
+            </select>
+          </div>
+          
+          <div class="filter-group">
+            <label for="month">Mês</label>
+            <select id="month">
+              <option value="0">Janeiro</option>
+              <option value="1">Fevereiro</option>
+              <option value="2">Março</option>
+              <option value="3">Abril</option>
+              <option value="4">Maio</option>
+              <option value="5">Junho</option>
+              <option value="6">Julho</option>
+              <option value="7">Agosto</option>
+              <option value="8">Setembro</option>
+              <option value="9">Outubro</option>
+              <option value="10">Novembro</option>
+              <option value="11">Dezembro</option>
+            </select>
+          </div>
+          
+          <div class="filter-group">
+            <label for="year">Ano</label>
+            <select id="year"></select>
+          </div>
+          
+          <div class="filter-group">
+            <label for="chartType">Tipo de Gráfico</label>
+            <select id="chartType">
+              <option value="line">Linha</option>
+              <option value="bar">Barras</option>
+              <option value="pie">Pizza</option>
+            </select>
+          </div>
+        </div>
+        <div class="filter-actions">
+          <button class="export-btn" onclick="exportReport()">
+            <i class="fas fa-download"></i>
+            Exportar PDF
+          </button>
+          <button class="generate-btn" onclick="loadReport()">
+            <i class="fas fa-chart-line"></i>
+            Gerar Relatório
+          </button>
+        </div>
+      </div>
     </section>
 
-    <section class="summary">
-      <div class="card">
-        <h3>Receitas</h3>
-        <p id="income">R$ 0,00</p>
+    <section class="summary-section">
+      <div class="summary-header">
+        <h2><i class="fas fa-chart-pie"></i> Resumo do Período</h2>
+        <div class="period-display" id="periodDisplay">
+          <i class="far fa-calendar-alt"></i>
+          <span>Carregando...</span>
+        </div>
       </div>
+      
+      <div class="summary-cards">
+        <div class="summary-card">
+          <div class="card-header">
+            <h3>Receitas</h3>
+            <i class="fas fa-arrow-down income-icon"></i>
+          </div>
+          <p class="card-value" id="income">R$ 0,00</p>
+          <div class="card-change positive">
+            <i class="fas fa-arrow-up"></i>
+            <span id="incomeChange">0%</span> vs período anterior
+          </div>
+        </div>
 
-      <div class="card">
-        <h3>Despesas</h3>
-        <p id="expense">R$ 0,00</p>
-      </div>
+        <div class="summary-card">
+          <div class="card-header">
+            <h3>Despesas</h3>
+            <i class="fas fa-arrow-up expense-icon"></i>
+          </div>
+          <p class="card-value" id="expense">R$ 0,00</p>
+          <div class="card-change negative">
+            <i class="fas fa-arrow-down"></i>
+            <span id="expenseChange">0%</span> vs período anterior
+          </div>
+        </div>
 
-      <div class="card">
-        <h3>Saldo</h3>
-        <p id="balance">R$ 0,00</p>
+        <div class="summary-card">
+          <div class="card-header">
+            <h3>Saldo</h3>
+            <i class="fas fa-wallet balance-icon"></i>
+          </div>
+          <p class="card-value" id="balance">R$ 0,00</p>
+          <div class="card-change" id="balanceChange">
+            <i class="fas fa-minus"></i>
+            <span>0%</span> vs período anterior
+          </div>
+        </div>
+
+        <div class="summary-card">
+          <div class="card-header">
+            <h3>Economia</h3>
+            <i class="fas fa-piggy-bank savings-icon"></i>
+          </div>
+          <p class="card-value" id="savingsRate">0%</p>
+          <div class="card-change" id="savingsChange">
+            <i class="fas fa-chart-line"></i>
+            <span>Taxa de economia</span>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="chart-card">
-      <h3>Evolução do Mês</h3>
-      <canvas id="reportChart"></canvas>
+    <section class="charts-section">
+      <div class="chart-container main-chart">
+        <div class="chart-header">
+          <h3><i class="fas fa-chart-line"></i> Evolução Financeira</h3>
+          <div class="chart-options">
+            <button class="chart-option active" data-type="daily">Diário</button>
+            <button class="chart-option" data-type="weekly">Semanal</button>
+            <button class="chart-option" data-type="cumulative">Acumulado</button>
+          </div>
+        </div>
+        <div class="chart-wrapper">
+          <canvas id="trendChart"></canvas>
+          <div class="chart-empty" id="trendChartEmpty">
+            <i class="fas fa-chart-line"></i>
+            <p>Nenhum dado disponível</p>
+            <small>Selecione um período para visualizar</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="side-charts">
+        <div class="chart-container">
+          <div class="chart-header">
+            <h3><i class="fas fa-chart-pie"></i> Despesas por Categoria</h3>
+          </div>
+          <div class="chart-wrapper">
+            <canvas id="categoryChart"></canvas>
+            <div class="chart-empty" id="categoryChartEmpty">
+              <i class="fas fa-chart-pie"></i>
+              <p>Sem categorias</p>
+              <small>Nenhuma despesa no período</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="chart-container">
+          <div class="chart-header">
+            <h3><i class="fas fa-chart-bar"></i> Comparativo Mensal</h3>
+          </div>
+          <div class="chart-wrapper">
+            <canvas id="comparisonChart"></canvas>
+            <div class="chart-empty" id="comparisonChartEmpty">
+              <i class="fas fa-chart-bar"></i>
+              <p>Sem dados</p>
+              <small>Comparação indisponível</small>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
+    <section class="details-section">
+      <div class="section-header">
+        <h2><i class="fas fa-list"></i> Detalhes das Transações</h2>
+        <div class="table-actions">
+          <button class="table-action" onclick="exportCSV()">
+            <i class="fas fa-file-csv"></i>
+            Exportar CSV
+          </button>
+        </div>
+      </div>
+      
+      <div class="table-container">
+        <table id="transactionsTable">
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Tipo</th>
+              <th>Categoria</th>
+              <th>Descrição</th>
+              <th>Valor</th>
+            </tr>
+          </thead>
+          <tbody id="transactionsBody">
+            <!-- Transações serão carregadas aqui -->
+            <tr class="empty-row">
+              <td colspan="5">
+                <div class="table-empty">
+                  <i class="fas fa-exchange-alt"></i>
+                  <p>Nenhuma transação no período selecionado</p>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
   </main>
 
   <script src="reports.js"></script>

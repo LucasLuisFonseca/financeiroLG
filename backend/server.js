@@ -80,3 +80,23 @@ app.delete("/goals/:id", authMiddleware, (req,res)=>{
     ()=>res.json({success:true})
   );
 });
+
+
+app.post("/investments", (req, res) => {
+  const { userId, title, value, rate, months } = req.body;
+
+  const finalValue = value * Math.pow(1 + rate / 100, months);
+  const profit = finalValue - value;
+
+  db.run(
+    `INSERT INTO investments 
+     (user_id, title, value, rate, months, final_value, profit)
+     VALUES (?, ?, ?, ?, ?, ?, ?)`,
+    [userId, title, value, rate, months, finalValue, profit],
+    function (err) {
+      if (err) return res.status(500).json({ error: "Erro ao salvar investimento" });
+
+      res.json({ success: true });
+    }
+  );
+});

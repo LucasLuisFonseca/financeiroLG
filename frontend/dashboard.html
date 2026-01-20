@@ -4,77 +4,160 @@
   <meta charset="UTF-8" />
   <title>L & G Finanças | Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="dashboard.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+  <!-- Menu Hamburger -->
+<button class="menu-toggle" id="menuToggle">
+  <i class="fas fa-bars"></i>
+</button>
 
-  <aside class="sidebar">
-    <h2>L & G <span>Finanças</span></h2>
+<!-- Overlay -->
+<div class="overlay" id="overlay"></div>
 
-    <nav>
-     <a href="dashboard.html" class="active">Dashboard</a>
-<a href="transactions.html">Transações</a>
-<a href="goals.html">Metas</a>
-<a href="reports.html">Relatórios</a>
+  <aside class="sidebar" id="sidebar">
+    <div class="logo">
+      <i class="fas fa-chart-line"></i>
+      <h2>L & G <span>Finanças</span></h2>
+    </div>
 
+    <nav class="sidebar-nav">
+      <a href="dashboard.html" class="nav-link active">
+        <i class="fas fa-chart-bar"></i>
+        <span>Dashboard</span>
+      </a>
+      <a href="transactions.html" class="nav-link">
+        <i class="fas fa-exchange-alt"></i>
+        <span>Transações</span>
+      </a>
+      <a href="goals.html" class="nav-link">
+        <i class="fas fa-bullseye"></i>
+        <span>Metas</span>
+      </a>
+      <a href="reports.html" class="nav-link">
+        <i class="fa-solid fa-file-invoice"></i>
+        <span>Relatórios</span>
+      </a>
     </nav>
 
-    <button id="logout">Sair</button>
+    <div class="sidebar-footer">
+      <button id="themeToggle" class="theme-btn">
+        <i class="fas fa-moon"></i>
+      </button>
+      <button id="logout" class="logout-btn">
+        <i class="fas fa-sign-out-alt"></i>
+      </button>
+    </div>
   </aside>
 
-  <main class="content">
-    <header>
-      <h1> Seja bem vindo (a)!</h1>
+  <div class="overlay" id="overlay"></div>
 
-      <div class="actions">
-        <button id="themeToggle">🌙</button>
+  <main class="content" id="content">
+    <header class="main-header">
+      <div class="header-left">
+        <h1>Bem-vindo de volta</h1>
+        <p class="subtitle">Aqui está o resumo das suas finanças</p>
+      </div>
+      
+      <div class="date-display">
+        <i class="far fa-calendar"></i>
+        <span id="currentDate"></span>
       </div>
     </header>
 
-    <section class="cards">
-      <div class="card">
-        <h3>Saldo Atual</h3>
-        <p id="balance">R$ 0,00</p>
+    <section class="stats">
+      <div class="stat-card">
+        <div class="stat-header">
+          <h3>Saldo Atual</h3>
+          <i class="fas fa-wallet"></i>
+        </div>
+        <p class="stat-value" id="balance">R$ 0,00</p>
+        <div class="stat-trend positive">
+          <i class="fas fa-arrow-up"></i>
+          <span>+12%</span>
+        </div>
       </div>
 
-      <div class="card">
-        <h3>Receitas</h3>
-        <p class="income">R$ 0,00</p>
+      <div class="stat-card">
+        <div class="stat-header">
+          <h3>Receitas</h3>
+          <i class="fas fa-arrow-down"></i>
+        </div>
+        <p class="stat-value income">R$ 0,00</p>
+        <div class="stat-trend positive">
+          <i class="fas fa-arrow-up"></i>
+          <span>+8%</span>
+        </div>
       </div>
 
-      <div class="card">
-        <h3>Despesas</h3>
-        <p class="expense">R$ 0,00</p>
+      <div class="stat-card">
+        <div class="stat-header">
+          <h3>Despesas</h3>
+          <i class="fas fa-arrow-up"></i>
+        </div>
+        <p class="stat-value expense">R$ 0,00</p>
+        <div class="stat-trend negative">
+          <i class="fas fa-arrow-down"></i>
+          <span>-5%</span>
+        </div>
       </div>
     </section>
 
     <section class="charts">
       <div class="chart-card">
-        <h3>Receitas x Despesas</h3>
-        <canvas id="barChart"></canvas>
+        <h3>Receitas vs Despesas</h3>
+        <div class="chart-wrapper">
+          <canvas id="barChart"></canvas>
+          <div class="chart-empty" id="barChartEmpty">
+            <i class="fas fa-chart-bar"></i>
+            <p>Sem dados para mostrar</p>
+          </div>
+        </div>
       </div>
 
       <div class="chart-card">
         <h3>Gastos por Categoria</h3>
-        <canvas id="pieChart"></canvas>
+        <div class="chart-wrapper">
+          <canvas id="pieChart"></canvas>
+          <div class="chart-empty" id="pieChartEmpty">
+            <i class="fas fa-chart-pie"></i>
+            <p>Sem categorias</p>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="goals">
-      <h2>🎯 Metas Financeiras</h2>
-
-      <div class="goal">
-        <span>Viagem</span>
-        <div class="progress">
-          <div style="width: 60%"></div>
+    <section class="bottom-section">
+      <div class="goals-card">
+        <div class="section-header">
+          <h3>Metas em Progresso</h3>
+          <a href="goals.html">Ver todas</a>
         </div>
-        <small>R$ 3.000 / R$ 5.000</small>
+        <div class="goals-list" id="goalsContainer">
+          <div class="empty">
+            <i class="fas fa-bullseye"></i>
+            <p>Nenhuma meta definida</p>
+          </div>
+        </div>
       </div>
 
+      <div class="recent-card">
+        <div class="section-header">
+          <h3>Transações Recentes</h3>
+          <a href="transactions.html">Ver todas</a>
+        </div>
+        <div class="transactions-list" id="transactionsList">
+          <div class="empty">
+            <i class="fas fa-receipt"></i>
+            <p>Nenhuma transação</p>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 
