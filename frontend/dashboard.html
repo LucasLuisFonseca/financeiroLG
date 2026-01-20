@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>L & G Finanças | Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <link rel="stylesheet" href="dashboard.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <aside class="sidebar">
+    <h2>L & G <span>Finanças</span></h2>
+
+    <nav>
+     <a href="dashboard.html" class="active">Dashboard</a>
+<a href="transactions.html">Transações</a>
+<a href="goals.html">Metas</a>
+<a href="reports.html">Relatórios</a>
+
+    </nav>
+
+    <button id="logout">Sair</button>
+  </aside>
+
+  <main class="content">
+    <header>
+      <h1> Seja bem vindo (a)!</h1>
+
+      <div class="actions">
+        <button id="themeToggle">🌙</button>
+      </div>
+    </header>
+
+    <section class="cards">
+      <div class="card">
+        <h3>Saldo Atual</h3>
+        <p id="balance">R$ 0,00</p>
+      </div>
+
+      <div class="card">
+        <h3>Receitas</h3>
+        <p class="income">R$ 0,00</p>
+      </div>
+
+      <div class="card">
+        <h3>Despesas</h3>
+        <p class="expense">R$ 0,00</p>
+      </div>
+    </section>
+
+    <section class="charts">
+      <div class="chart-card">
+        <h3>Receitas x Despesas</h3>
+        <canvas id="barChart"></canvas>
+      </div>
+
+      <div class="chart-card">
+        <h3>Gastos por Categoria</h3>
+        <canvas id="pieChart"></canvas>
+      </div>
+    </section>
+
+    <section class="goals">
+      <h2>🎯 Metas Financeiras</h2>
+
+      <div class="goal">
+        <span>Viagem</span>
+        <div class="progress">
+          <div style="width: 60%"></div>
+        </div>
+        <small>R$ 3.000 / R$ 5.000</small>
+      </div>
+
+    </section>
+  </main>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>

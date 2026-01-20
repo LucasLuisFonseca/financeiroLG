@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>financeiroL+G | Metas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="goals.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <aside class="sidebar">
+    <h2>financeiro<span>L+G</span></h2>
+    <nav>
+     <a href="dashboard.html" class="active">Dashboard</a>
+<a href="transactions.html">Transações</a>
+<a href="goals.html">Metas</a>
+<a href="reports.html">Relatórios</a>
+    </nav>
+    <button id="logout">Sair</button>
+  </aside>
+
+  <main class="content">
+    <header>
+      <h1>Metas Financeiras</h1>
+    </header>
+
+    <section class="form-card">
+      <h3>Nova Meta</h3>
+      <form id="goalForm">
+        <input type="text" id="title" placeholder="Título da meta" required>
+        <input type="number" id="target" placeholder="Valor da meta" step="0.01" required>
+        <button>Criar Meta</button>
+      </form>
+    </section>
+
+    <section id="goals" class="goals"></section>
+  </main>
+
+  <script src="goals.js"></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>financeiroL+G | Relatórios</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="reports.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <aside class="sidebar">
+    <h2>financeiro<span>L+G</span></h2>
+    <nav>
+     <a href="dashboard.html" class="active">Dashboard</a>
+<a href="transactions.html">Transações</a>
+<a href="goals.html">Metas</a>
+<a href="reports.html">Relatórios</a>
+    </nav>
+    <button id="logout">Sair</button>
+  </aside>
+
+  <main class="content">
+
+    <header>
+      <h1>📊 Relatórios Financeiros</h1>
+    </header>
+
+    <section class="filters">
+      <select id="month">
+        <option value="0">Janeiro</option>
+        <option value="1">Fevereiro</option>
+        <option value="2">Março</option>
+        <option value="3">Abril</option>
+        <option value="4">Maio</option>
+        <option value="5">Junho</option>
+        <option value="6">Julho</option>
+        <option value="7">Agosto</option>
+        <option value="8">Setembro</option>
+        <option value="9">Outubro</option>
+        <option value="10">Novembro</option>
+        <option value="11">Dezembro</option>
+      </select>
+
+      <select id="year"></select>
+
+      <button id="filter">Filtrar</button>
+    </section>
+
+    <section class="summary">
+      <div class="card">
+        <h3>Receitas</h3>
+        <p id="income">R$ 0,00</p>
+      </div>
+
+      <div class="card">
+        <h3>Despesas</h3>
+        <p id="expense">R$ 0,00</p>
+      </div>
+
+      <div class="card">
+        <h3>Saldo</h3>
+        <p id="balance">R$ 0,00</p>
+      </div>
+    </section>
+
+    <section class="chart-card">
+      <h3>Evolução do Mês</h3>
+      <canvas id="reportChart"></canvas>
+    </section>
+
+  </main>
+
+  <script src="reports.js"></script>
+</body>
+</html>
